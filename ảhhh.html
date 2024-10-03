@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Theme</title>
+    <style>
+        body {
+            background-color: #ccffcc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .christmas-tree {
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 150px solid green;
+            position: relative;
+            margin: 50px;
+        }
+
+        .christmas-tree:before, .christmas-tree:after {
+            content: '';
+            position: absolute;
+            left: -75px;
+            top: -100px;
+            width: 0;
+            height: 0;
+            border-left: 75px solid transparent;
+            border-right: 75px solid transparent;
+            border-bottom: 125px solid green;
+        }
+
+        .christmas-tree:before {
+            left: -50px;
+            top: -150px;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 100px solid green;
+        }
+
+        .gift-box {
+            width: 200px;
+            height: 150px;
+            background-color: #ffcccc;
+            border: 5px solid #ff6666;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .gift-box:hover {
+            transform: scale(1.1);
+        }
+
+        .ribbon {
+            width: 20px;
+            height: 100%;
+            background-color: red;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .ribbon-horizontal {
+            width: 100%;
+            height: 20px;
+            background-color: red;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        .message {
+            display: none;
+            font-size: 30px;
+            color: #ff0000;
+            animation: blink 1s infinite;
+            margin-top: 20px;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .confetti {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .confetti span {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 0, 150, 0.8);
+            animation: fall 2s linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(500px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="christmas-tree"></div>
+
+    <div class="gift-box" onclick="openGift()">
+        <div class="ribbon"></div>
+        <div class="ribbon-horizontal"></div>
+        <div class="confetti" id="confetti"></div>
+    </div>
+
+    <div class="message" id="message">You such an fat ass b!tch</div>
+
+    <script>
+        function openGift() {
+            // Hiện dòng chữ nhấp nháy
+            document.getElementById('message').style.display = 'block';
+
+            // Hiện pháo giấy
+            const confetti = document.getElementById('confetti');
+            confetti.style.display = 'block';
+
+            // Tạo pháo giấy
+            for (let i = 0; i < 100; i++) {
+                const span = document.createElement('span');
+                span.style.left = Math.random() * 100 + '%';
+                span.style.animationDelay = Math.random() * 2 + 's';
+                confetti.appendChild(span);
+            }
+
+            // Sau khoảng thời gian pháo giấy biến mất
+            setTimeout(() => {
+                confetti.style.display = 'none';
+                confetti.innerHTML = '';  // Xóa các mảnh pháo giấy
+            }, 3000);
+        }
+    </script>
+
+</body>
+</html>
